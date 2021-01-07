@@ -34611,7 +34611,7 @@
       u = n('q1tI'),
       c = n.n(u),
       l = n('YS25'),
-      s = { basename: '/' };
+      s = { basename: '/bdjgs' };
     window.routerBase && (s.basename = window.routerBase);
     var f = Object({ NODE_ENV: 'production' }).__IS_SERVER
         ? null

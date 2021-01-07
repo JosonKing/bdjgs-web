@@ -5,4 +5,6 @@ export default defineConfig({
     type: 'none',
   },
   routes: [{ path: '/', component: '@/pages/index' }],
+  base: '/bdjgs',
+  outputPath: '/docs',
 });
