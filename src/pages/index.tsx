@@ -333,7 +333,7 @@ class IndexPage extends Component {
   render() {
     return (
       <div className={styles.container}>
-        {/* <div className={styles.header}></div> */}
+        <div className={styles.header}></div>
         <div className={styles.content}>
           <div className={styles.contentTop}>
             <div className={styles.title}>微信公众号：不多讲故事</div>

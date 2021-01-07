@@ -49,7 +49,7 @@
     (n.o = function (e, t) {
       return Object.prototype.hasOwnProperty.call(e, t);
     }),
-    (n.p = '/'),
+    (n.p = './'),
     n((n.s = 0));
 })({
   '++zV': function (e, t, n) {
@@ -21423,6 +21423,7 @@
         return c.a.createElement(
           'div',
           { className: _c.a.container },
+          c.a.createElement('div', { className: _c.a.header }),
           c.a.createElement(
             'div',
             { className: _c.a.content },
@@ -34615,10 +34616,10 @@
     window.routerBase && (s.basename = window.routerBase);
     var f = Object({ NODE_ENV: 'production' }).__IS_SERVER
         ? null
-        : Object(l['a'])(s),
+        : Object(l['b'])(s),
       d = function () {
         var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-        return e || (f = Object(l['a'])(s)), f;
+        return e || (f = Object(l['b'])(s)), f;
       },
       p = n('ODXe'),
       h = n('1WJl'),

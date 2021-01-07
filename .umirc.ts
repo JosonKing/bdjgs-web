@@ -7,4 +7,6 @@ export default defineConfig({
   routes: [{ path: '/', component: '@/pages/index' }],
   // base: '/bdjgs',
   outputPath: '/docs',
+  publicPath: './',
+  history: { type: 'hash' },
 });
