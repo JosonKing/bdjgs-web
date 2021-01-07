@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
+import { groupBy } from 'lodash';
+import classnames from 'classnames';
 import { Input, Menu, Dropdown, Carousel, Card, Tag } from 'antd';
 import {
   QqOutlined,
@@ -13,6 +15,8 @@ import styles from './index.less';
 const banner1 = require('../assets/banner_1.jpg');
 const banner2 = require('../assets/banner_2.jpg');
 const banner3 = require('../assets/banner_3.jpg');
+const author_bd = require('../assets/author_bd.jpg');
+const author_joson = require('../assets/author_joson.jpg');
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -49,6 +53,7 @@ const articles = [
     like_num: 3,
     read_num: 278,
     title: '姐姐的小屋——隔空的善意和深情',
+    author: '不多先生',
   },
   {
     comment_num: 29,
@@ -61,6 +66,7 @@ const articles = [
     read_num: 1502,
     reprint_num: 1,
     title: '我们的小屋',
+    author: '不多先生',
   },
   {
     comment_num: 0,
@@ -73,6 +79,7 @@ const articles = [
     read_num: 180,
     reprint_num: 0,
     title: '黔东南游记',
+    author: '庄生',
   },
   {
     comment_num: 5,
@@ -85,6 +92,7 @@ const articles = [
     read_num: 244,
     reprint_num: 0,
     title: '网吧老板，你好',
+    author: '不多先生',
   },
   {
     comment_num: 4,
@@ -97,6 +105,7 @@ const articles = [
     read_num: 249,
     reprint_num: 0,
     title: '满船清梦压星河',
+    author: '庄生',
   },
   {
     comment_num: 20,
@@ -109,6 +118,7 @@ const articles = [
     read_num: 672,
     reprint_num: 0,
     title: '木心如子',
+    author: '不多先生',
   },
   {
     comment_num: 3,
@@ -120,6 +130,7 @@ const articles = [
     like_num: 4,
     read_num: 196,
     title: '你来人间一趟，你要看看太阳',
+    author: '不多先生',
   },
   {
     comment_num: 1,
@@ -131,6 +142,7 @@ const articles = [
     read_num: 160,
     title:
       '以前觉得玩轮滑只是耍帅\n\n直到遇见华信的社长\n\n才知道\n\n有些人是真的帅',
+    author: '不多先生',
   },
 ];
 
@@ -146,6 +158,7 @@ const stories = [
     read_num: 196,
     reprint_num: 0,
     title: '南风知我意',
+    author: '不多先生',
   },
   {
     comment_num: 1,
@@ -158,6 +171,7 @@ const stories = [
     read_num: 147,
     reprint_num: 0,
     title: '见青山',
+    author: '不多先生',
   },
   {
     comment_num: 4,
@@ -170,6 +184,7 @@ const stories = [
     read_num: 279,
     reprint_num: 0,
     title: 'lele_R',
+    author: '不多先生',
   },
   {
     comment_num: 7,
@@ -182,6 +197,7 @@ const stories = [
     read_num: 222,
     reprint_num: 0,
     title: '祝你快乐 不止中秋',
+    author: '不多先生',
   },
 ];
 
@@ -190,6 +206,7 @@ class IndexPage extends Component {
     super(props);
     this.state = {
       searchValue: '',
+      selectedAuthor: '',
     };
     this.weixinimgindex = 0;
   }
@@ -211,6 +228,58 @@ class IndexPage extends Component {
   }
 
   componentDidMount() {}
+
+  handleAuthorClick = (key) => {
+    this.setState({
+      selectedAuthor: key,
+    });
+  };
+
+  renderAuthors = () => {
+    const { selectedAuthor } = this.state;
+    console.log('selectedAuthor:', selectedAuthor);
+    let allArticles = articles.concat(stories);
+    let groups = groupBy(allArticles, 'author');
+    return (
+      <div className={styles.authors}>
+        <div
+          className={classnames(styles.author, {
+            [styles.selected]: selectedAuthor === '',
+          })}
+          onClick={() => this.handleAuthorClick('')}
+        >
+          {/* <div className={styles.img}>
+              <img alt={''} src='全部'></img>
+            </div> */}
+          <div className={styles.info}>
+            <div className={styles.name}>全部</div>
+            <div className={styles.desc}>所有讲故事的人</div>
+          </div>
+        </div>
+        {Object.keys(groups).map((key) => (
+          <div
+            className={classnames(styles.author, {
+              [styles.selected]: selectedAuthor === key,
+            })}
+            onClick={() => this.handleAuthorClick(key)}
+          >
+            <div className={styles.img}>
+              <img
+                alt={key}
+                src={key === '庄生' ? author_joson : author_bd}
+              ></img>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.name}>{key}</div>
+              <div className={styles.desc}>
+                {key === '庄生' ? '不帮发朋友圈' : '不帮砍拼多多'}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   getArticleTitle(title, copyRightType) {
     let dom = (
@@ -239,10 +308,13 @@ class IndexPage extends Component {
   }
 
   renderArticles = (articles, categoryName) => {
-    const { searchValue } = this.state;
+    const { searchValue, selectedAuthor } = this.state;
     let articleList = !!searchValue
       ? articles.filter((article) => article.title.indexOf(searchValue) > -1)
       : articles;
+    articleList = !!selectedAuthor
+      ? articleList.filter((article) => article.author === selectedAuthor)
+      : articleList;
     let articlesDom = articleList.map((article) => (
       <Card
         hoverable
@@ -356,6 +428,7 @@ class IndexPage extends Component {
               </Dropdown>
             </div>
           </div>
+          {this.renderAuthors()}
           <div className={styles.carousel}>
             <Carousel dotPosition="bottom" autoplay>
               <img src={banner1} alt="banner1"></img>
