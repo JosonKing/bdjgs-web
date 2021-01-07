@@ -1,2 +1,15 @@
-# bdjgs-web
-微信公众号：不多讲故事
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```

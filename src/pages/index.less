@@ -1,0 +1,175 @@
+html,
+body,
+:global(#root) {
+  @media (min-width: 1px) {
+    .content {
+      width: 100%;
+
+      .articles {
+        .articleList {
+          > div {
+            width: e('calc(50% - 10px)');
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .content {
+      width: 750px;
+
+      .articles {
+        .articleList {
+          > div {
+            width: e('calc(50% - 10px)');
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .content {
+      width: 970px;
+
+      .articles {
+        .articleList {
+          > div {
+            width: e('calc(33% - 10px)');
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 1200px) {
+    .content {
+      width: 1170px;
+
+      .articles {
+        .articleList {
+          > div {
+            width: e('calc(25% - 10px)');
+          }
+        }
+      }
+    }
+  }
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow: auto;
+
+  .header {
+    width: 100%;
+    height: 128px;
+    background-image: url('../assets/top_banner.jpg');
+    background-size: 100% 100%;
+  }
+
+  .content {
+    margin: 0 auto;
+
+    .contentTop {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-size: 28px;
+      }
+
+      .search {
+        width: 350px;
+      }
+
+      .nav {
+        > span {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .carousel {
+      width: 100%;
+      height: 250px;
+
+      .carouselImage0 {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-image: url('../assets/banner_1.jpg');
+      }
+
+      .carouselImage1 {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-image: url('../assets/banner_2.jpg');
+      }
+
+      .carouselImage2 {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-image: url('../assets/banner_3.jpg');
+      }
+    }
+
+    .articles {
+      width: 100%;
+
+      .articlesTitle {
+        width: 100%;
+        height: 36px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+
+        .flag {
+          display: inline-block;
+          width: 4px;
+          height: 18px;
+          background-color: rgb(139, 220, 67);
+        }
+
+        .categoryName {
+          font-size: 18px;
+          margin-left: 10px;
+        }
+      }
+
+      .articleList {
+        display: flex;
+        flex-wrap: wrap;
+
+        > div {
+          width: e('calc(25% - 10px)');
+          margin: 5px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 14px;
+    height: 40px;
+    background-color: #ffc900;
+    text-align: center;
+    line-height: 40px;
+  }
+}
+
+:global {
+  .ant-card-body {
+    padding: 10px;
+  }
+}
