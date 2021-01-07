@@ -5,7 +5,7 @@ export default defineConfig({
     type: 'none',
   },
   routes: [{ path: '/', component: '@/pages/index' }],
-  // base: '/bdjgs',
+  base: '/bdjgs-web',
   outputPath: '/docs',
   publicPath: './',
   history: { type: 'hash' },
